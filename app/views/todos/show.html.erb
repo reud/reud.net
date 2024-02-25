@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+<h1>Todos ID = <%= @todo.id %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description </th>
+      <th>Update </th>
+      <th>Show</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= form_with model: @todo do |form| %>
+      <tr>
+        <td><%= form.text_field :content %></td>
+        <td><%= form.submit %>
+        <td><%= link_to 'Show', todo_path(@todo) %></td>
+        <td><%= link_to 'Destroy', todo_path(@todo), data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

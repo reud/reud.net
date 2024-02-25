@@ -1,0 +1,47 @@
+<h1>Todos</h1>
+
+<%= form_with model: @todo do |form| %>
+  <% if @todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+        <% @todo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_field :content %>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Description </th>
+      <th>Update </th>
+      <th>Show</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todos.each do |todo| %>
+      <%= form_with model: todo do |form| %>
+        <tr>
+          <td><%= todo.id %>
+          <td><%= form.text_field :content %></td>
+          <td><%= form.submit %>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Destroy', todo, method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure?' }  %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
